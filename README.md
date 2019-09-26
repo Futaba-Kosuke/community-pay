@@ -28,7 +28,7 @@ yarn install
 5. App.vueの起動
 ```sh
 cd src
-vue serve
+yarn serve
 # Control+Cで終了
 ```
 

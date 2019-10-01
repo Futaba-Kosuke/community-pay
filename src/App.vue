@@ -1,34 +1,42 @@
 <template>
-  <div id="app">
-    <router-view/>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/use_coin">Use</router-link> |
-      <router-link to="/create_coin">Create</router-link> |
-      <router-link to="/qr_reader">QR</router-link>
-    </div>
-  </div>
+  <v-app>
+    <v-app-bar app>
+      <v-toolbar-title class="headline text-uppercase">
+        <span>コミュペイ</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <router-link to="/qr_reader"><v-btn
+        icon
+        target="_blank"
+      >
+        <v-img
+          :src="require('./assets/icon_setting.png')"
+          class="my-3"
+          contain
+          height="30"
+        ></v-img>
+      </v-btn></router-link>
+    </v-app-bar>
+
+    <v-content>
+      <router-view/>
+    </v-content>
+
+    <v-footer
+      app
+      color="primary lighten-1"
+      padless
+    >
+      <v-row
+        justify="center"
+        no-gutters
+      >
+        <router-link to="/"><v-btn text color="white" class="my-2">Home</v-btn></router-link> 
+        <router-link to="/about"><v-btn text color="white" class="my-2">About</v-btn></router-link> 
+        <router-link to="/use_coin"><v-btn text color="white" class="my-2">Use</v-btn></router-link> 
+        <router-link to="/create_coin"><v-btn text color="white" class="my-2">Create</v-btn></router-link> 
+        <router-link to="/qr_reader"><v-btn text color="white" class="my-2">QR</v-btn></router-link>
+      </v-row>
+    </v-footer>
+  </v-app>
 </template>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>

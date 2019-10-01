@@ -1,18 +1,10 @@
 <template>
-  <v-container>
+  <!-- <v-container>
     <TransitionButton title="create_coin" link="/create_coin"/>
     <TransitionButton title="use_coin" link="/use_coin"/>
     <TransitionButton title="qr_reader" link="/qr_reader"/>
-  </v-container>
+  </v-container> -->
+  <div class="home">
+    <h1>This is a home page</h1>
+  </div>
 </template>
-
-<script>
-import TransitionButton from '@/components/TransitionButton.vue'
-
-export default {
-  name: 'home',
-  components: {
-    TransitionButton,
-  }
-}
-</script>

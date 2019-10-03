@@ -1,18 +1,10 @@
 <template>
+  <!-- <v-container>
+    <TransitionButton title="create_coin" link="/create_coin"/>
+    <TransitionButton title="use_coin" link="/use_coin"/>
+    <TransitionButton title="qr_reader" link="/qr_reader"/>
+  </v-container> -->
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>This is a home page</h1>
   </div>
 </template>
-
-<script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  }
-}
-</script>

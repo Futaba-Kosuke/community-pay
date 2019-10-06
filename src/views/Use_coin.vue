@@ -1,6 +1,6 @@
 <template>
   <div class="use_coin">
-    <h1>This is a use_coin page</h1>
+    <!-- <h1>This is a use_coin page</h1> -->
     <Buttons :list="list"/>
   </div>
 </template>

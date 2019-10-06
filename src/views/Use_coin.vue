@@ -1,31 +1,35 @@
 <template>
   <div class="use_coin">
-    <!-- <h1>This is a use_coin page</h1> -->
-    <v-layout justify-center>
-      <v-btn block text height="70px" @click="addCoin()">新規コイン追加</v-btn>
-    </v-layout>
-    <Buttons :list="coin_list"/>
+    <Buttons :list="enable_coins"/>
+    <AddCoinList :coins="disable_coins" @add_event="addCoin($event)" />
   </div>
 </template>
 
 <script>
 import Buttons from '../components/ButtonList'
+import AddCoinList from '../components/AddCoinList'
 
 export default {
   name: 'use_coin',
   components: {
     Buttons,
+    AddCoinList,
   },
   data: function() {
     return {
-      coin_list: [],
+      enable_coins: [],
+      disable_coins: [
+        'タピオカコイン',
+        '高専コイン',
+      ],
     }
   },
   methods: {
     addCoin: function(name) {
-      this.coin_list.push({
+      this.enable_coins.push({
         name: name,
       });
+      this.disable_coins = this.disable_coins.filter((n) => n !== name);
     }
   }
 }

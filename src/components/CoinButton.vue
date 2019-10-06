@@ -1,6 +1,6 @@
 <template>
   <v-btn block height=70px>
-    {{ msg }}  
+    {{ msg }}
   </v-btn>
 </template>
 

@@ -29,7 +29,7 @@ export default {
       this.enable_coins.push({
         name: name,
       });
-      this.disable_coins = this.disable_coins.filter((n) => n !== name);
+      this.disable_coins = this.disable_coins.filter((n) => {n !== name});
     }
   }
 }

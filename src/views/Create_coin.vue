@@ -22,7 +22,7 @@
       v-model="coin.explanation"
       label="説明"
     />
-    <v-btn @click="createCoin()">この設定でコインを作成する</v-btn>
+    <v-btn @click="createCoin()" :disabled="isCoin">この設定でコインを作成する</v-btn>
   </v-container>
 </template>
 
@@ -43,8 +43,16 @@ export default {
   },
   methods: {
     createCoin: function () {
-      this.$store.commit('disableCoin', this.coin);
-      console.log(this.$store.state.negative_coin);
+      if (this.coin.name !== '' && !isNaN(this.coin.yen) && !isNaN(this.coin.coin) && this.coin.explanation !== '') {
+        this.$store.commit('disableCoin', this.coin);
+        // console.log(this.$store.state.negative_coin);
+        Object.assign(this.$data, this.$options.data.call(this));
+      }
+    }
+  },
+  computed: {
+    isCoin: function () {
+      return !(this.coin.name !== '' && this.coin.yen !== '' && this.coin.coin !== '' && this.coin.explanation !== '' && !isNaN(this.coin.yen) && !isNaN(this.coin.coin));
     }
   }
 }

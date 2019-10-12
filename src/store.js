@@ -5,17 +5,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    active_coin: [],
-    negative_coin: [],
+    all_coin: [],  // 全てのコイン(Object)
+    active_coin: [],  // activeなコイン(String)
+    negative_coin: [],  // negativeなコイン(String)
   },
   mutations: {
-    enableCoin (state, coin) {
-      state.active_coin.push(coin);
-      state.negative_coin = state.negative_coin.filter((n) => n.name !== coin.name);
+    createCoin (state, coin) {
+      state.all_coin.push(coin);
+      state.negative_coin.push(coin.name);
     },
-    disableCoin (state, coin) {
-      state.negative_coin.push(coin);
-      state.active_coin = state.active_coin.filter((n) => n.name !== coin.name);
+    enableCoin (state, coin_name) {
+      state.active_coin.push(coin_name);
+      state.negative_coin = state.negative_coin.filter((n) => n !== coin_name);
+    },
+    disableCoin (state, coin_name) {
+      state.negative_coin.push(coin_name);
+      state.active_coin = state.active_coin.filter((n) => n !== coin_name);
     },
   },
   actions: {

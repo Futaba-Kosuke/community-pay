@@ -1,7 +1,7 @@
 <template>
   <div class="use_coin">
-    <Buttons :list="enable_coins"/>
-    <AddCoinList :coins="disable_coins" @add_event="addCoin($event)" />
+    <Buttons/>
+    <AddCoinList/>
   </div>
 </template>
 
@@ -29,8 +29,6 @@ export default {
       this.enable_coins.push({
         name: name,
       });
-      console.log(typeof(name) + ' ' + name + ' ' + typeof(this.disable_coins[0]) + ' ' + this.disable_coins[0]);
-      console.log(name === this.disable_coins[0]);
       this.disable_coins = this.disable_coins.filter((n) => n !== name);
     }
   }

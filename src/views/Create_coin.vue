@@ -44,8 +44,7 @@ export default {
   methods: {
     createCoin: function () {
       if (this.coin.name !== '' && !isNaN(this.coin.yen) && !isNaN(this.coin.coin) && this.coin.explanation !== '') {
-        this.$store.commit('disableCoin', this.coin);
-        // console.log(this.$store.state.negative_coin);
+        this.$store.commit('createCoin', this.coin);
         Object.assign(this.$data, this.$options.data.call(this));
       }
     }

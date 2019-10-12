@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <Button v-for="l in list" v-bind:key="l.name" :msg="l.name"/>
+    <Button v-for="coin in active_coin" :key="coin" :msg="coin"/>
   </v-card>
 </template>
 
@@ -12,8 +12,10 @@ export default {
   components: {
     Button,
   },
-  props: {
-    list: Array,
+  data: function () {
+    return {
+      active_coin: this.$store.state.active_coin,
+    }
   }
 }
 </script>

@@ -6,6 +6,7 @@
     label="コイン追加"
     outlined
     block
+    :disabled="isEmpty"
   ></v-select>
   <v-btn text @click="enableCoin()" :disabled="isSelected">このコインを使用可能にする</v-btn>
 </v-container>
@@ -30,6 +31,9 @@ export default {
   computed: {
     isSelected: function () {
       return this.selected_coin === '';
+    },
+    isEmpty: function () {
+      return this.negative_coin.length === 0;
     }
   }
 }

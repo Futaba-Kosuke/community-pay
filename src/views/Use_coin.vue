@@ -1,19 +1,19 @@
 <template>
   <div class="use_coin">
-    <Buttons/>
-    <AddCoinList/>
+    <ActiveCoin/>
+    <NegativeCoin/>
   </div>
 </template>
 
 <script>
-import Buttons from '../components/ButtonList'
-import AddCoinList from '../components/AddCoinList'
+import ActiveCoin from '../components/ActiveCoin'
+import NegativeCoin from '../components/NegativeCoin'
 
 export default {
   name: 'use_coin',
   components: {
-    Buttons,
-    AddCoinList,
+    ActiveCoin,
+    NegativeCoin,
   },
   data: function() {
     return {

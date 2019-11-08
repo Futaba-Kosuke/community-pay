@@ -21,14 +21,14 @@ export default {
   data () {
     return {
       dialog_flag: false,
-      coin_data: [],
+      coin_data: {},
     }
   },
   methods: {
     openCoin() {
       // coin_nameと同じデータをall_coinから検索して、this.coin_dataに挿入
       const result = this.$store.state.all_coin.filter((n) => n.name === this.coin_name)
-      this.coin_data = result
+      this.coin_data = result[0]
 
       // dialogを表示するフラグをtrueにする
       this.dialog_flag = true

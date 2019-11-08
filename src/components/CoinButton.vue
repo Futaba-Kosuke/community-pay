@@ -3,7 +3,7 @@
     <v-btn block height=70px @click="openCoin()">
       {{ coin_name }}
     </v-btn>
-    <CoinDataDialog :dialog_flag='dialog_flag' :coin_data='coin_data'/>
+    <CoinDataDialog :dialog_flag='dialog_flag' :coin_data='coin_data' @closeThis="closeCoin()"/>
   </div>
 </template>
 
@@ -30,8 +30,12 @@ export default {
       const result = this.$store.state.all_coin.filter((n) => n.name === this.coin_name)
       this.coin_data = result
 
-      // dialogを表示するフラグを立てる
-      this.dialog_flag = !this.dialog_flag
+      // dialogを表示するフラグをtrueにする
+      this.dialog_flag = true
+    },
+    closeCoin() {
+      // コインのdialogを表示するフラグをfalseにする
+      this.dialog_flag = false
     }
   }
 }

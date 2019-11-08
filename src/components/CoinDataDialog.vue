@@ -7,12 +7,10 @@
     scrollable
   >
     <v-card tile>
-      <v-toolbar
-        flat
-        dark
-        color="primary"
-      >
-
+      <v-toolbar dark color="primary">
+        <v-btn icon dark @click="closeThis()">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-toolbar>
     </v-card>
   </v-dialog>
@@ -24,5 +22,10 @@ export default {
     coin_data: Array,
     dialog_flag: Boolean,
   },
+  methods: {
+    closeThis() {
+      this.$emit('closeThis')
+    }
+  }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <Button v-for="coin in active_coin" :key="coin" :msg="coin"/>
+    <Button v-for="coin in active_coin" :key="coin" :coin_name="coin"/>
   </v-card>
 </template>
 

@@ -5,9 +5,31 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    all_coin: [],  // 全てのコイン(Object)
-    active_coin: [],  // activeなコイン(String)
-    negative_coin: [],  // negativeなコイン(String)
+    // 全てのコイン(Object)
+    all_coin: [
+      {
+        name: '',
+        yen: '',
+        coin: '',
+        explanation: '',
+      },
+      {
+        name: 'active',
+        yen: '0',
+        coin: '0',
+        explanation: 'this is active coin',
+      },
+      {
+        name: 'negative',
+        yen: '100',
+        coin: '0',
+        explanation: 'this is negative coin',
+      }
+    ],
+    // activeなコイン(String)
+    active_coin: ['active'],
+    // negativeなコイン(String)
+    negative_coin: ['negative'],
   },
   mutations: {
     createCoin (state, coin) {

@@ -4,18 +4,6 @@
       <v-toolbar-title class="headline text-uppercase">
         <span>コミュペイ</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <router-link to="/qr_reader"><v-btn
-        icon
-        target="_blank"
-      >
-        <v-img
-          :src="require('./assets/icon_setting.png')"
-          class="my-3"
-          contain
-          height="30"
-        ></v-img>
-      </v-btn></router-link>
     </v-app-bar>
 
     <v-content>

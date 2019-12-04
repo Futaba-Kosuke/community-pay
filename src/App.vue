@@ -22,11 +22,21 @@
 
 <script>
 import TransitionBar from './components/TransitionBar'
+// import firebase from '@/firebase'
 
 export default {
   name: 'app',
   components: {
     TransitionBar,
-  }  
+  },
+  // created: () => {
+  //   const db = firebase.firestore();
+  //   db.collection('test1').get()
+  //     .then(res => {
+  //       res.forEach((data) => {
+  //         console.log(data.data())
+  //       })
+  //     });
+  // }
 }
 </script>

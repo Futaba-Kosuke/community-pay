@@ -7,6 +7,7 @@
       v-model="coin.name"
       label="コイン名"
       class="input_boxes"
+      outlined
     />
 
     <p class="items_explanation">2. コインの変換レートを記入してください</p>
@@ -16,6 +17,7 @@
           v-model="coin.yen"
           label="日本円"
           class="input_boxes"
+          outlined
         />
       </v-col>
       <v-col style="padding-top: 0px; padding-bottom: 0px;">
@@ -23,6 +25,7 @@
           v-model="coin.coin"
           :label="coin.name"
           class="input_boxes"
+          outlined
         />
       </v-col>
     </v-row>
@@ -33,6 +36,7 @@
       v-model="coin.deadline"
       label="使用期限"
       class="input_boxes"
+      outlined
     ></v-select>
 
     <p class="items_explanation">4. コインの詳細について自由に記入してください</p>
@@ -40,6 +44,7 @@
       v-model="coin.explanation"
       label="説明"
       class="input_boxes"
+      outlined
     />
     <v-btn @click="createCoin()" :disabled="isCoin">この設定でコインを作成する</v-btn>
   </v-container>

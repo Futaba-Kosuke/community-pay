@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import firebase from '@/firebase.js'
+
 export default {
   name: 'create_coin',
   components: {
@@ -73,6 +75,14 @@ export default {
     createCoin: function () {
       if (this.coin.name !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate) && this.coin.explanation !== '') {
         this.$store.commit('createCoin', this.coin);
+        const db = firebase.firestore();
+        db.collection("coin").add(this.coin)
+          .then(() => {
+            console.log("success!");
+          })
+          .catch((error) => {
+            console.error("Error: ", error);
+          })
         Object.assign(this.$data, this.$options.data.call(this));
       }
     }

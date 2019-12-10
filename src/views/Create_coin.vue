@@ -14,7 +14,7 @@
     <v-row>
       <v-col style="padding-top: 0px; padding-bottom: 0px;">
         <v-text-field
-          v-model="coin.yen"
+          v-model="coin.yen_rate"
           label="日本円"
           class="input_boxes"
           outlined
@@ -22,7 +22,7 @@
       </v-col>
       <v-col style="padding-top: 0px; padding-bottom: 0px;">
         <v-text-field
-          v-model="coin.coin"
+          v-model="coin.coin_rate"
           :label="coin.name"
           class="input_boxes"
           outlined
@@ -52,24 +52,26 @@
 
 <script>
 export default {
-  name: 'about',
+  name: 'create_coin',
   components: {
   },
   data: function() {
     return {
       coin: {
         name: '',
-        yen: '',
-        coin: '',
+        yen_rate: '',
+        coin_rate: '',
         deadline: '無制限',
         explanation: '',
+        owners: [],
+        users: [],
       },
       deadlines: ['無制限', '1日', '3日', '5日', '1週間', '3週間', '1ヵ月', '3ヵ月', '5ヵ月', '10ヵ月', '1年']
     }
   },
   methods: {
     createCoin: function () {
-      if (this.coin.name !== '' && !isNaN(this.coin.yen) && !isNaN(this.coin.coin) && this.coin.explanation !== '') {
+      if (this.coin.name !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate) && this.coin.explanation !== '') {
         this.$store.commit('createCoin', this.coin);
         Object.assign(this.$data, this.$options.data.call(this));
       }
@@ -77,7 +79,7 @@ export default {
   },
   computed: {
     isCoin: function () {
-      return !(this.coin.name !== '' && this.coin.yen !== '' && this.coin.coin !== '' && this.coin.deadline !== '' && this.coin.explanation !== '' && !isNaN(this.coin.yen) && !isNaN(this.coin.coin));
+      return !(this.coin.name !== '' && this.coin.yen_rate !== '' && this.coin.coin_rate !== '' && this.coin.deadline !== '' && this.coin.explanation !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate));
     }
   }
 }

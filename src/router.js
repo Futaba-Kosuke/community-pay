@@ -32,6 +32,11 @@ export default new Router({
       component: () => import('./views/Create_coin.vue'),
     },
     {
+      path: '/create_coin_form',
+      name: 'create_coin_form',
+      component: () => import('./views/Create_coin_form.vue'),
+    },
+    {
       path: '/qr_reader',
       name: 'qr_reader',
       component: () => import('./views/Qr_reader.vue'),

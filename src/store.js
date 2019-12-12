@@ -15,14 +15,16 @@ export default new Vuex.Store({
       },
       {
         name: 'active',
-        yen: '0',
-        coin: '0',
+        yen_rate: '0',
+        coin_rate: '0',
+        deadline: '1日',
         explanation: 'this is active coin',
       },
       {
         name: 'negative',
-        yen: '100',
-        coin: '0',
+        yen_rate: '100',
+        coin_rate: '0',
+        deadline: '1ヵ月',
         explanation: 'this is negative coin',
       }
     ],

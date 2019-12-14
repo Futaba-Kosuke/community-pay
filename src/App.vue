@@ -4,6 +4,8 @@
       <v-toolbar-title class="headline text-uppercase">
         <span>コミュペイ</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn v-if="isLogin" text to="/login_form">ログイン</v-btn>
     </v-app-bar>
 
     <v-content>
@@ -22,13 +24,18 @@
 
 <script>
 import TransitionBar from './components/TransitionBar'
-import firebase from '@/firebase'
+import firebase from 'firebase'
 
 export default {
   name: 'app',
   components: {
     TransitionBar,
   },
+  computed: {
+    isLogin: () => {
+      return firebase.auth().currentUser === null
+    }
+  }
   // created: () => {
   //   const db = firebase.firestore();
   //   db.collection('test1').get()

@@ -40,6 +40,11 @@ export default new Router({
       path: '/qr_reader',
       name: 'qr_reader',
       component: () => import('./views/Qr_reader.vue'),
-    }
+    },
+    {
+      path: '/login_form',
+      name: 'login_form',
+      component: () => import('./views/LoginForm.vue'),
+    },
   ]
 })

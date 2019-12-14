@@ -22,7 +22,7 @@
 
 <script>
 import TransitionBar from './components/TransitionBar'
-// import firebase from '@/firebase'
+import firebase from '@/firebase'
 
 export default {
   name: 'app',

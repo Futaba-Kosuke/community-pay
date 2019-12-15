@@ -8,6 +8,7 @@
 const firebase = require("firebase");
 const firebaseui = require("firebaseui-ja");
 require("firebaseui-ja/dist/firebaseui.css");
+import store from '@/store'
 
 export default {
   name: "Login",
@@ -22,9 +23,11 @@ export default {
         signInSuccessWithAuthResult: (authResult, redirectUrl) => {
           console.log("signInSuccessWithAuthResult", authResult, redirectUrl);
 
-          const isNewUser = authResult.additionalUserInfo.isNewUser;  // 新規ユーザーか、そうでないか(Boolean)
-          const displayName = authResult.user.displayName;  // 表示名(String)
-          const photoURL = authResult.user.photoURL;  // ユーザー画像のURL(String)
+          let isNewUser = authResult.additionalUserInfo.isNewUser;  // 新規ユーザーか、そうでないか(Boolean)
+          let displayName = authResult.user.displayName;  // 表示名(String)
+          let photoURL = authResult.user.photoURL;  // ユーザー画像のURL(String)
+
+          store.commit('updateUser', true)
 
           // SNSログイン＆で登録済みであればスキップ
           if (displayName != "ゲスト" && !isNewUser) {
@@ -68,6 +71,7 @@ export default {
               console.log("Auth登録完了", res);
               alert("ログインしました。");
             });
+          
         },
         signInFailure: function(error) {
           console.log("signInFailure", error);

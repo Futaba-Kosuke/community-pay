@@ -18,6 +18,7 @@
 
 <script>
 import firebase from 'firebase'
+import store from '@/store'
 
 export default {
   name: 'Logout',
@@ -35,6 +36,7 @@ export default {
       firebase.auth().signOut()
         .then((res) => {
           alert("正常にログアウトしました。")
+          store.commit('updateUser', false)
         })
         .catch((err) => {
           alert("問題が発生しました。アプリを再起動してください。aaa", err)

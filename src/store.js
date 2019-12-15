@@ -32,6 +32,8 @@ export default new Vuex.Store({
     active_coin: ['active'],
     // negativeなコイン(String)
     negative_coin: ['negative'],
+    // ユーザー情報(Boolean)
+    user_state: null,
   },
   mutations: {
     createCoin (state, coin) {
@@ -46,6 +48,9 @@ export default new Vuex.Store({
       state.negative_coin.push(coin_name);
       state.active_coin = state.active_coin.filter((n) => n !== coin_name);
     },
+    updateUser (state, user_state) {
+      state.user_state = user_state;
+    }
   },
   actions: {
 

@@ -1,6 +1,6 @@
 <template>
   <div class="my-2">
-    <v-btn to="/login_form" x-large class="start_button" color="rgb(71, 140, 234)">ログインしてください</v-btn>
+    <v-btn to="/login_form" x-large class="start_button" color="indigo">ログインしてください</v-btn>
   </div>
 </template>
 

@@ -19,7 +19,8 @@
   </div>
   </template>
 
-<script>export default {
+<script>
+export default {
   name: 'QR',
   components: {},
   data: function() {

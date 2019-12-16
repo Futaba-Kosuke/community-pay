@@ -4,6 +4,9 @@
       <v-toolbar-title class="headline text-uppercase">
         <span>コミュペイ</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn v-if="!isLogin" text to="/login_form">ログイン</v-btn>
+      <logout-form v-if="isLogin"></logout-form>
     </v-app-bar>
 
     <v-content>
@@ -21,13 +24,31 @@
 </template>
 
 <script>
-import TransitionBar from './components/TransitionBar'
-// import firebase from '@/firebase'
+import TransitionBar from '@/components/TransitionBar'
+import LogoutForm from '@/components/LogoutForm'
+import firebase from 'firebase'
+import store from '@/store'
 
 export default {
   name: 'app',
   components: {
     TransitionBar,
+    LogoutForm,
+  },
+  mounted: () => {
+    // ログイン・非ログイン状態の判定
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        store.commit('updateUser', true)
+      } else {
+        store.commit('updateUser', false)
+      }
+    })
+  },
+  computed: {
+    isLogin: () => {
+      return store.state.user_state
+    }
   },
   // created: () => {
   //   const db = firebase.firestore();

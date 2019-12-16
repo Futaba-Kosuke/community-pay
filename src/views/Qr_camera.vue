@@ -18,12 +18,8 @@ export default {
   methods: {
     onDecode: (content) => { 
       console.log("!!!!!")
-       },
-    
-    onDecode (decodedString) {
-    // ...
+    },
   }
- }
 }
 </script>
 

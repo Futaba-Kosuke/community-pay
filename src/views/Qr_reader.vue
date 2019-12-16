@@ -47,11 +47,11 @@ export default {
 </script>
 
 <style scoped>
-.items_explanation{
+.items_explanation {
   margin-top: 15px;
   margin-bottom: 10px;
 }
-.input_boxes{
+.input_boxes {
   margin-top: 0px;
   padding-top: 0px;
   padding: 15px;

@@ -46,5 +46,10 @@ export default new Router({
       name: 'login_form',
       component: () => import('./views/LoginForm.vue'),
     },
+    {
+      path: '/QR',
+      name: 'QR',
+      component: () => import('./views/Qr_camera.vue'),
+    }
   ]
 })

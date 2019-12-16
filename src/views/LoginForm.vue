@@ -70,6 +70,7 @@ export default {
             .then(res => {
               console.log("Auth登録完了", res);
               alert("ログインしました。");
+              this.$router.push('/')
             });
           
         },

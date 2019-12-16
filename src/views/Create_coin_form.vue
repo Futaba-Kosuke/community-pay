@@ -1,5 +1,6 @@
 <template>
-  <v-container class="create_coin">
+<div>
+  <v-container v-if="isLogin" class="create_coin">
     <b><p class="items_explanation" style="font-size: 20px;">○コイン生成</p></b>
 
     <p class="items_explanation">1. コインの名前を記入してください</p>
@@ -48,14 +49,19 @@
     />
     <v-btn @click="createCoin()" :disabled="isCoin">この設定でコインを作成する</v-btn>
   </v-container>
+  <forced-login-button v-if="!isLogin"/>
+</div>
 </template>
 
 <script>
 import firebase from '@/firebase.js'
+import store from '@/store'
+import ForcedLoginButton from '@/components/ForcedLoginButton'
 
 export default {
   name: 'create_coin',
   components: {
+    ForcedLoginButton,
   },
   data: function() {
     return {
@@ -90,6 +96,9 @@ export default {
   computed: {
     isCoin: function () {
       return !(this.coin.name !== '' && this.coin.yen_rate !== '' && this.coin.coin_rate !== '' && this.coin.deadline !== '' && this.coin.explanation !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate));
+    },
+    isLogin: () => {
+      return store.state.user_state
     }
   }
 }

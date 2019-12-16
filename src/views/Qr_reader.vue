@@ -1,6 +1,6 @@
 <template>  <!--この下にhtml-->
   <div>
-    <v-container class="Qr_reader">
+    <v-container v-if="isLogin" class="Qr_reader">
       <b><p class="items_explanation" style="font-size: 20px;">○コイン受け取り</p></b>
       <p class="items_explanation">値段を記入してください</p>
       <v-text-field
@@ -12,17 +12,23 @@
       <v-row>
         <v-col><v-spacer/></v-col>
         <v-col>
-        <v-btn to="QR" :disabled="Qr_reader" @clikc="noQR()">QR読み込み画面に移動する</v-btn>
+          <v-btn to="QR" :disabled="Qr_reader" @clikc="noQR()">QR読み込み画面に移動する</v-btn>
         </v-col>
       </v-row>
     </v-container>
+    <forced-login-button v-if="!isLogin"></forced-login-button>
   </div>
-  </template>
+</template>
 
 <script>
+import store from '@/store'
+import ForcedLoginButton from '@/components/ForcedLoginButton'
+
 export default {
   name: 'QR',
-  components: {},
+  components: {
+    ForcedLoginButton,
+  },
   data: function() {
     return {
       coin: {
@@ -41,6 +47,9 @@ export default {
   computed: {
     Qr_reader: function () {
       return !(this.coin.yen !== '' && !isNaN(this.coin.yen));
+    },
+    isLogin: () => {
+      return store.state.user_state
     }
   }
 }

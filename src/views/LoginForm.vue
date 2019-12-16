@@ -5,9 +5,9 @@
 </template>
 
 <script>
-const firebase = require("firebase");
-const firebaseui = require("firebaseui-ja");
-require("firebaseui-ja/dist/firebaseui.css");
+import firebase from 'firebase'
+import firebaseui from 'firebaseui-ja'
+import 'firebaseui-ja/dist/firebaseui.css'
 import store from '@/store'
 
 export default {

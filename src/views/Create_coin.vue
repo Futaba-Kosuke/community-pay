@@ -1,8 +1,25 @@
 <template>
   <div class="my-2">
-    <v-btn to="/create_coin_form" x-large class="start_button" color="rgb(71, 140, 234)">新規コインを作成する</v-btn>
+    <v-btn v-if="isLogin" to="/create_coin_form" x-large class="start_button" color="rgb(71, 140, 234)">新規コインを作成する</v-btn>
+    <forced-login-button v-if="!isLogin"></forced-login-button>
   </div>
 </template>
+
+<script>
+import store from '@/store'
+import ForcedLoginButton from '@/components/ForcedLoginButton'
+
+export default {
+  components: {
+    ForcedLoginButton,
+  },
+  computed: {
+    isLogin: () => {
+      return store.state.user_state
+    }
+  }
+}
+</script>
 
 <style scoped>
 .start_button {

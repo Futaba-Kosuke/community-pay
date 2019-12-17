@@ -14,7 +14,7 @@ export default {
   name: "Login",
   mounted() {
     console.log("Login_mounted");
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth());
     ui.start("#firebaseui-auth-container", {
       callbacks: {
         uiShown: () => {
@@ -70,6 +70,7 @@ export default {
             .then(res => {
               console.log("Auth登録完了", res);
               alert("ログインしました。");
+              this.$router.push('/')
             });
           
         },

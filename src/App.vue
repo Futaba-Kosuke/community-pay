@@ -27,6 +27,7 @@
 import TransitionBar from '@/components/TransitionBar'
 import LogoutForm from '@/components/LogoutForm'
 import firebase from 'firebase'
+import 'firebase/firestore'
 import store from '@/store'
 
 export default {
@@ -37,9 +38,18 @@ export default {
   },
   mounted: () => {
     // ログイン・非ログイン状態の判定
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged( (user) => {
       if (user) {
         store.commit('updateUser', true)
+        
+        const user = firebase.auth().currentUser
+        // console.log(user.uid)
+        const db = firebase.firestore()
+        db.collection('user').doc(user.uid).set({
+          name: user.displayName,
+          explanation: '',
+          management_coins: [],
+        })
       } else {
         store.commit('updateUser', false)
       }

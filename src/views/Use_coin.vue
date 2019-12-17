@@ -1,19 +1,30 @@
 <template>
-  <div class="use_coin">
+<div>
+  <div v-if="isLogin" class="use_coin">
     <ActiveCoin/>
     <NegativeCoin/>
   </div>
+  <forced-login-button v-if="!isLogin"></forced-login-button>
+</div>
 </template>
 
 <script>
+import store from '@/store'
 import ActiveCoin from '../components/ActiveCoin'
 import NegativeCoin from '../components/NegativeCoin'
+import ForcedLoginButton from '@/components/ForcedLoginButton'
 
 export default {
   name: 'use_coin',
   components: {
     ActiveCoin,
     NegativeCoin,
+    ForcedLoginButton,
+  },
+  computed: {
+    isLogin: () => {
+      return store.state.user_state
+    }
   },
   data: function() {
     return {

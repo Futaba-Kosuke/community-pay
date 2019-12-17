@@ -43,9 +43,13 @@ export default {
         store.commit('updateUser', true)
         
         const user = firebase.auth().currentUser
-        console.log(user.uid)
+        // console.log(user.uid)
         const db = firebase.firestore()
-        db.collection('user').doc(user.uid).set({ name: user.displayName })
+        db.collection('user').doc(user.uid).set({
+          name: user.displayName,
+          explanation: '',
+          management_coins: [],
+        })
       } else {
         store.commit('updateUser', false)
       }

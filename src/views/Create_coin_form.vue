@@ -99,6 +99,10 @@ export default {
           .catch((error) => {
             console.error("Error: ", error)
           })
+
+        db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm').update({
+          coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name)
+        })
         
         Object.assign(this.$data, this.$options.data.call(this))
       }

@@ -37,13 +37,15 @@ export default {
 
           const db = firebase.firestore()
           db.collection('user').doc(authResult.user.uid).set({
-            name: displayName,
-            explanation: '',
-            management_coins: [],
-            enable_coin_names: [],
+            name: displayName,  // String
+            explanation: '',  // String
+            management_coins: [],  // Array(Reference)
+            management_coin_names: [], // Array(String)
+            active_coins: [],  // Array(Array(AnyType))
+            active_coin_names: [],  // Array(String)
           })
           .then(() => {
-            console.log('aaa')
+            console.log('Firestoreへのユーザー登録完了')
           })
 
           switch (authResult.additionalUserInfo.providerId) {  // どのサービスを使ったのか

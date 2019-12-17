@@ -93,12 +93,16 @@ export default {
           .then((docRef) => {
             console.log("success!", docRef.id)
             db.collection('user').doc(current_user.uid).update({
-              management_coins: firebase.firestore.FieldValue.arrayUnion(docRef)  // 追加したコインのDB内でのPATHを、作成者のmanagement_coinsに追加
+              management_coins: firebase.firestore.FieldValue.arrayUnion(docRef),  // 追加したコインのDB内でのPATHを、作成者のmanagement_coinsに追加
             })
           })
           .catch((error) => {
             console.error("Error: ", error)
           })
+        
+        db.collection('user').doc(current_user.uid).update({
+          management_coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name) 
+        })
 
         db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm').update({
           coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name)

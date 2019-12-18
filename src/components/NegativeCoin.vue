@@ -48,6 +48,10 @@ export default {
       selected_coin_ref.update({
         users: firebase.firestore.FieldValue.arrayUnion(current_user_ref)
       })
+
+      alert(this.selected_coin + 'を有効化しました！')
+      this.$router.push('/')
+      this.$router.go(0)
     }
   },
   computed: {

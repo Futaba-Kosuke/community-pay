@@ -86,7 +86,6 @@ export default {
         const current_user_ref = db.collection('user').doc(current_user.uid)  // current_userのDB内でのPATH
 
         this.coin.owners.push(current_user_ref)
-        this.$store.commit('createCoin', this.coin)
         
         // コインの追加
         db.collection('coin').add(this.coin)
@@ -108,7 +107,9 @@ export default {
           coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name)
         })
         
-        Object.assign(this.$data, this.$options.data.call(this))
+        alert(this.coin.name + 'を作成しました！')
+        this.$router.push('/')
+        this.$router.go(0)
       }
     }
   },

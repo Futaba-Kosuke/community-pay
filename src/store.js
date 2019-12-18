@@ -12,7 +12,9 @@ export default new Vuex.Store({
     // negativeなコインの名前一覧(String)
     negative_coin_names: [],
     // ユーザー情報(Boolean)
-    user_state: null,
+    user_state: false,
+    // ローディング中はfalse(Boolean)
+    load_state: false,
   },
   mutations: {
     constCoins (state, coin_data) {
@@ -22,6 +24,9 @@ export default new Vuex.Store({
     },
     updateUser (state, user_state) {
       state.user_state = user_state
+    },
+    updateLoad (state, load_state) {
+      state.load_state = load_state
     }
   },
   actions: {

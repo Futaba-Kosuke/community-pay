@@ -8,24 +8,46 @@
     block
     :disabled="isEmpty"
   ></v-select>
-  <v-btn text @click="enableCoin()" :disabled="isSelected">このコインを使用可能にする</v-btn>
+  <v-btn text @click="toEnableCoin()" :disabled="isSelected">このコインを使用可能にする</v-btn>
 </v-container>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'add_coin',
   data: function() {
     return{
       selected_coin: '',
-      negative_coin: this.$store.state.negative_coin,
+      negative_coin: this.$store.state.negative_coin_names,
     }
   },
   methods: {
-    enableCoin: function () {
-      this.$store.commit('enableCoin', this.selected_coin);
-      this.selected_coin = '';
-      this.negative_coin = this.$store.state.negative_coin;
+    toEnableCoin: async function () {
+      const db = firebase.firestore()
+      
+      const current_user = firebase.auth().currentUser
+      const current_user_ref = db.collection('user').doc(current_user.uid)
+      
+      let selected_coin_ref
+      await db.collection('coin').where('name', '==', this.selected_coin)
+        .get()
+        .then((query) => {
+          query.forEach((doc) => {
+            selected_coin_ref = db.collection('coin').doc(doc.id)
+          })
+        })
+
+      current_user_ref.update({
+        active_coin_names: firebase.firestore.FieldValue.arrayUnion(this.selected_coin)
+      })
+      current_user_ref.update({
+        active_coins: firebase.firestore.FieldValue.arrayUnion(selected_coin_ref)
+      })
+      selected_coin_ref.update({
+        users: firebase.firestore.FieldValue.arrayUnion(current_user_ref)
+      })
     }
   },
   computed: {

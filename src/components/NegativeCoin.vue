@@ -38,14 +38,20 @@ export default {
             selected_coin_ref = db.collection('coin').doc(doc.id)
           })
         })
+      
+      const selected_coin_data = {
+        address: selected_coin_ref,
+        value: 0,
+        update_time: new Date()
+      }
 
-      current_user_ref.update({
+      await current_user_ref.update({
         active_coin_names: firebase.firestore.FieldValue.arrayUnion(this.selected_coin)
       })
-      current_user_ref.update({
-        active_coins: firebase.firestore.FieldValue.arrayUnion(selected_coin_ref)
+      await current_user_ref.update({
+        active_coins: firebase.firestore.FieldValue.arrayUnion(selected_coin_data)
       })
-      selected_coin_ref.update({
+      await selected_coin_ref.update({
         users: firebase.firestore.FieldValue.arrayUnion(current_user_ref)
       })
 

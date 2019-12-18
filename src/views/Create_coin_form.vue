@@ -78,9 +78,11 @@ export default {
     }
   },
   methods: {
-    createCoin: function () {
+    createCoin: async function () {
       if (this.coin.name !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate) && this.coin.explanation !== '') {
         
+        console.log('aaa')
+
         const current_user = firebase.auth().currentUser
         const db = firebase.firestore();
         const current_user_ref = db.collection('user').doc(current_user.uid)  // current_userのDB内でのPATH
@@ -88,7 +90,7 @@ export default {
         this.coin.owners.push(current_user_ref)
         
         // コインの追加
-        db.collection('coin').add(this.coin)
+        await db.collection('coin').add(this.coin)
           .then((docRef) => {
             console.log("success!", docRef.id)
             db.collection('user').doc(current_user.uid).update({
@@ -99,11 +101,11 @@ export default {
             console.error("Error: ", error)
           })
         
-        db.collection('user').doc(current_user.uid).update({
+        await db.collection('user').doc(current_user.uid).update({
           management_coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name) 
         })
 
-        db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm').update({
+        await db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm').update({
           coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name)
         })
         

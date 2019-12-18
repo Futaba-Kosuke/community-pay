@@ -67,8 +67,8 @@ export default {
         await db_current_user.get()
           .then((res) => {
             const active_coins_data = res.data().active_coins
-            active_coins_data.forEach(async (ref) => {
-              await db.collection('coin').doc(ref.id).get()
+            active_coins_data.forEach(async (item) => {
+              await db.collection('coin').doc(item.address.id).get()
                 .then((coin) => {
                   active_coins.push(coin.data())
                 })

@@ -63,19 +63,33 @@ export default {
         
         let negative_coin_names = coin_names.filter((item) => active_coin_names.indexOf(item) === -1)  // 無効なコインの名前一覧の取得
 
-        let active_coins = []
+        let user_active_coins  // 代入するのでそのまま
+        let coin_active_coins = []  // pushして行く用に空配列として定義
         await db_current_user.get()
           .then((res) => {
+
             const active_coins_data = res.data().active_coins
+            user_active_coins = active_coins_data
+            
             active_coins_data.forEach(async (item) => {
+              
               await db.collection('coin').doc(item.address.id).get()
                 .then((coin) => {
-                  active_coins.push(coin.data())
+                  coin_active_coins.push(coin.data())
                 })
+            
             })
           })
 
-        store.commit('constCoins', { active_coins: active_coins, active_coin_names: active_coin_names, negative_coin_names: negative_coin_names})
+        const loadDatas = {
+          user_active_coins: user_active_coins,
+          coin_active_coins: coin_active_coins,
+          active_coin_names: active_coin_names,
+          negative_coin_names: negative_coin_names,
+        }
+        console.log(loadDatas)
+        
+        store.commit('constCoins', loadDatas)
         store.commit('updateLoad', true)
       } else {
         // ログインしていない

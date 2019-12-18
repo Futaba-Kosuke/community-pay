@@ -27,7 +27,7 @@ export default {
   methods: {
     openCoin() {
       // coin_nameと同じデータをall_coinから検索して、this.coin_dataに挿入
-      const result = this.$store.state.active_coins.filter((n) => n.name === this.coin_name)
+      const result = this.$store.state.coin_active_coins.filter((n) => n.name === this.coin_name)
       this.coin_data = result[0]
 
       // dialogを表示するフラグをtrueにする

@@ -40,6 +40,7 @@ export default {
         })
       
       const selected_coin_data = {
+        name: this.selected_coin,
         address: selected_coin_ref,
         value: 0,
         update_time: new Date()

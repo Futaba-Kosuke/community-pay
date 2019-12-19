@@ -9,7 +9,7 @@
       <logout-form v-if="isLogin"></logout-form>
     </v-app-bar>
 
-    <v-content>
+    <v-content v-if="isLoaded">
       <router-view/>
     </v-content>
 
@@ -38,36 +38,73 @@ export default {
   },
   mounted: () => {
     // ログイン・非ログイン状態の判定
-    firebase.auth().onAuthStateChanged( (user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
+        // ログインしている
         store.commit('updateUser', true)
-        
-        const user = firebase.auth().currentUser
-        // console.log(user.uid)
+
+        console.log('loading...')
+
         const db = firebase.firestore()
-        db.collection('user').doc(user.uid).set({
-          name: user.displayName,
-          explanation: '',
-          management_coins: [],
-        })
+        const db_coin_names = db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm')
+        const db_current_user = db.collection('user').doc(user.uid)
+        
+        let coin_names  // コインの名前一覧の取得
+        await db_coin_names.get()
+          .then((res) => {
+            coin_names = res.data().coin_names
+          })
+
+        let active_coin_names  // 有効なコインの名前一覧の取得
+        await db_current_user.get()
+          .then((res) => {
+            active_coin_names = res.data().active_coin_names
+          })
+        
+        let negative_coin_names = coin_names.filter((item) => active_coin_names.indexOf(item) === -1)  // 無効なコインの名前一覧の取得
+
+        let user_active_coins  // 代入するのでそのまま
+        let coin_active_coins = []  // pushして行く用に空配列として定義
+        await db_current_user.get()
+          .then((res) => {
+
+            const active_coins_data = res.data().active_coins
+            user_active_coins = active_coins_data
+            
+            active_coins_data.forEach(async (item) => {
+              
+              await db.collection('coin').doc(item.address.id).get()
+                .then((coin) => {
+                  coin_active_coins.push(coin.data())
+                })
+            
+            })
+          })
+
+        const loadDatas = {
+          user_active_coins: user_active_coins,
+          coin_active_coins: coin_active_coins,
+          active_coin_names: active_coin_names,
+          negative_coin_names: negative_coin_names,
+        }
+        console.log(loadDatas)
+        
+        store.commit('constCoins', loadDatas)
+        store.commit('updateLoad', true)
       } else {
+        // ログインしていない
         store.commit('updateUser', false)
+        store.commit('updateLoad', true)
       }
     })
   },
   computed: {
     isLogin: () => {
       return store.state.user_state
+    },
+    isLoaded: () => {
+      return store.state.load_state
     }
   },
-  // created: () => {
-  //   const db = firebase.firestore();
-  //   db.collection('test1').get()
-  //     .then(res => {
-  //       res.forEach((data) => {
-  //         console.log(data.data())
-  //       })
-  //     });
-  // }
 }
 </script>

@@ -78,18 +78,40 @@ export default {
     }
   },
   methods: {
-    createCoin: function () {
+    createCoin: async function () {
       if (this.coin.name !== '' && !isNaN(this.coin.yen_rate) && !isNaN(this.coin.coin_rate) && this.coin.explanation !== '') {
-        this.$store.commit('createCoin', this.coin);
+        
+        console.log('aaa')
+
+        const current_user = firebase.auth().currentUser
         const db = firebase.firestore();
-        db.collection("coin").add(this.coin)
-          .then(() => {
-            console.log("success!");
+        const current_user_ref = db.collection('user').doc(current_user.uid)  // current_userのDB内でのPATH
+
+        this.coin.owners.push(current_user_ref)
+        
+        // コインの追加
+        await db.collection('coin').add(this.coin)
+          .then((docRef) => {
+            console.log("success!", docRef.id)
+            db.collection('user').doc(current_user.uid).update({
+              management_coins: firebase.firestore.FieldValue.arrayUnion(docRef),  // 追加したコインのDB内でのPATHを、作成者のmanagement_coinsに追加
+            })
           })
           .catch((error) => {
-            console.error("Error: ", error);
+            console.error("Error: ", error)
           })
-        Object.assign(this.$data, this.$options.data.call(this));
+        
+        await db.collection('user').doc(current_user.uid).update({
+          management_coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name) 
+        })
+
+        await db.collection('coin_names').doc('mqZnSrGaIxXB3uZdMQdm').update({
+          coin_names: firebase.firestore.FieldValue.arrayUnion(this.coin.name)
+        })
+        
+        alert(this.coin.name + 'を作成しました！')
+        this.$router.push('/')
+        this.$router.go(0)
       }
     }
   },

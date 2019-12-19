@@ -5,51 +5,30 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    // 全てのコイン(Object)
-    all_coin: [
-      {
-        name: '',
-        yen: '',
-        coin: '',
-        explanation: '',
-      },
-      {
-        name: 'active',
-        yen_rate: '0',
-        coin_rate: '0',
-        deadline: '1日',
-        explanation: 'this is active coin',
-      },
-      {
-        name: 'negative',
-        yen_rate: '100',
-        coin_rate: '0',
-        deadline: '1ヵ月',
-        explanation: 'this is negative coin',
-      }
-    ],
-    // activeなコイン(String)
-    active_coin: ['active'],
-    // negativeなコイン(String)
-    negative_coin: ['negative'],
+    // activeなコインのデータ(Object)
+    user_active_coins: [],  // user固有のデータ(残高など)
+    coin_active_coins: [],  // userに紐付けされたコインのデータ(コインそのものの名前・レートなど)
+    // activeなコインの名前一覧(String)
+    active_coin_names: [],
+    // negativeなコインの名前一覧(String)
+    negative_coin_names: [],
     // ユーザー情報(Boolean)
-    user_state: null,
+    user_state: false,
+    // ローディング中はfalse(Boolean)
+    load_state: false,
   },
   mutations: {
-    createCoin (state, coin) {
-      state.all_coin.push(coin);
-      state.negative_coin.push(coin.name);
-    },
-    enableCoin (state, coin_name) {
-      state.active_coin.push(coin_name);
-      state.negative_coin = state.negative_coin.filter((n) => n !== coin_name);
-    },
-    disableCoin (state, coin_name) {
-      state.negative_coin.push(coin_name);
-      state.active_coin = state.active_coin.filter((n) => n !== coin_name);
+    constCoins (state, coin_data) {
+      state.user_active_coins = coin_data.user_active_coins
+      state.coin_active_coins = coin_data.coin_active_coins
+      state.active_coin_names = coin_data.active_coin_names
+      state.negative_coin_names = coin_data.negative_coin_names
     },
     updateUser (state, user_state) {
-      state.user_state = user_state;
+      state.user_state = user_state
+    },
+    updateLoad (state, load_state) {
+      state.load_state = load_state
     }
   },
   actions: {

@@ -6,6 +6,7 @@
 
 <script>
 import firebase from 'firebase'
+import 'firebase/firestore'
 import firebaseui from 'firebaseui-ja'
 import 'firebaseui-ja/dist/firebaseui.css'
 import store from '@/store'
@@ -33,6 +34,19 @@ export default {
           if (displayName != "ゲスト" && !isNewUser) {
             return true;
           }
+
+          const db = firebase.firestore()
+          db.collection('user').doc(authResult.user.uid).set({
+            name: displayName,  // String
+            explanation: '',  // String
+            management_coins: [],  // Array(Reference)
+            management_coin_names: [], // Array(String)
+            active_coins: [],  // Array(Array(AnyType))
+            active_coin_names: [],  // Array(String)
+          })
+          .then(() => {
+            console.log('Firestoreへのユーザー登録完了')
+          })
 
           switch (authResult.additionalUserInfo.providerId) {  // どのサービスを使ったのか
             case firebase.auth.GoogleAuthProvider.PROVIDER_ID:

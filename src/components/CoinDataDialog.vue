@@ -23,7 +23,13 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-subtitle class="item-subtitle">換算</v-list-item-subtitle>
-            <v-list-item-title class="item-title">{{ coin_data.coin }} {{coin_data.name}} は {{ coin_data.yen }} 円です </v-list-item-title>
+            <v-list-item-title class="item-title">{{ coin_data.coin_rate }} {{coin_data.name}} は {{ coin_data.yen_rate }} 円です </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-subtitle class="item-subtitle">利用期限</v-list-item-subtitle>
+            <v-list-item-title class="item-title" v-text="deadline"></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item>
@@ -46,6 +52,14 @@ export default {
   methods: {
     closeThis() {
       this.$emit('closeThis')
+    }
+  },
+  computed: {
+    deadline: function() {
+      if (this.coin_data.deadline === '無制限') {
+        return this.coin_data.deadline
+      } 
+      return '最後の使用から ' + this.coin_data.deadline
     }
   }
 }

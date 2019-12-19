@@ -44,10 +44,11 @@ export default {
       this.dialog_flag = true
     },
     qrRead: function (mode) {
-      this.$store.commit('updateManageState', { state: mode, value: this.value})
+      this.$store.commit('updateManageState', { state: mode, value: this.value, target_coin_name: this.coin_name})
       console.log(this.$store.state.manage_state)
       console.log(JSON.stringify(this.$store.state.manage_state))
       console.log(JSON.parse(JSON.stringify(this.$store.state.manage_state)))
+      this.$router.push('/Qr_camera')
     }
   }
 }

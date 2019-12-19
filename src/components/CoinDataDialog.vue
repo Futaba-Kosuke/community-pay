@@ -58,9 +58,8 @@ export default {
     deadline: function() {
       if (this.coin_data.deadline === '無制限') {
         return this.coin_data.deadline
-      } else {
-        return '最後の使用から ' + this.coin_data.deadline
-      }
+      } 
+      return '最後の使用から ' + this.coin_data.deadline
     }
   }
 }

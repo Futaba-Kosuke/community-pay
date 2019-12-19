@@ -37,6 +37,10 @@ export default {
       const result = this.$store.state.coin_active_coins.filter((n) => n.name === this.coin_name)
       this.coin_data = result[0]
 
+      const target_coin = this.$store.state.user_active_coins.filter((n) => n.name === this.coin_name)
+      console.log(target_coin[0].value)
+      this.coin_data.value = target_coin[0].value
+
       // dialogを表示するフラグをtrueにする
       this.dialog_flag = true
     },

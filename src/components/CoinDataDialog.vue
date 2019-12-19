@@ -6,6 +6,7 @@
       </v-btn>
       <v-toolbar-title>{{ coin_data.name }}</v-toolbar-title>
     </v-toolbar>
+    <p>{{ coin_data.value }}</p>
     <v-card-actions>
       <v-col><v-btn @click="generateQR(true)" style="height: 100px;" block color="primary">ペイ</v-btn></v-col>
       <v-col><v-btn @click="generateQR(false)" style="height: 100px;" block color="primary">チャージ</v-btn></v-col>

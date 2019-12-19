@@ -1,9 +1,16 @@
 <template>
   <div>
-    <v-btn block height=70px @click="openCoin()">
+    <v-btn block height=70px @click.stop="openCoin()">
       {{ coin_name }}
-    </v-btn>
-    <CoinDataDialog :dialog_flag='dialog_flag' :coin_data='coin_data' @closeThis="closeCoin()"/>
+    </v-btn>  
+    <v-dialog
+      v-model="dialog_flag"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <CoinDataDialog :dialog_flag='dialog_flag' :coin_data='coin_data' @closeThis="closeCoin()"/>
+    </v-dialog>
   </div>
 </template>
 

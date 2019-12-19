@@ -1,51 +1,44 @@
 <template>
-  <v-dialog
-    v-model="dialog_flag"
-    fullscreen
-    hide-overlay
-    transition="dialog-bottom-transition"
-  >
-    <v-card tile>
-      <v-toolbar dark color="primary">
-        <v-btn icon dark @click="closeThis()">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
-        <v-toolbar-title>{{ coin_data.name }}</v-toolbar-title>
-      </v-toolbar>
-      <v-card-actions>
-        <v-col><v-btn @click="generateQR(true)" style="height: 100px;" block color="primary">ペイ</v-btn></v-col>
-        <v-col><v-btn @click="generateQR(false)" style="height: 100px;" block color="primary">チャージ</v-btn></v-col>
-      </v-card-actions>
-      <vue-qrcode v-if="qr_str" :value="qr_str" :options="option" tag="img"></vue-qrcode>
-      <v-list three-line subheader>
-        <v-subheader>これはコインの使用・詳細確認画面です</v-subheader>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="item-subtitle">コイン名</v-list-item-subtitle>
-            <v-list-item-title class="item-title">{{ coin_data.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="item-subtitle">換算</v-list-item-subtitle>
-            <v-list-item-title class="item-title">{{ coin_data.coin_rate }} {{coin_data.name}} は {{ coin_data.yen_rate }} 円です </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="item-subtitle">利用期限</v-list-item-subtitle>
-            <v-list-item-title class="item-title" v-text="deadline"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-subtitle class="item-subtitle">説明</v-list-item-subtitle>
-            <v-list-item-title class="item-title">{{ coin_data.explanation }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-card>
-  </v-dialog>
+  <v-card tile>
+    <v-toolbar dark color="primary">
+      <v-btn icon dark @click="closeThis()">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <v-toolbar-title>{{ coin_data.name }}</v-toolbar-title>
+    </v-toolbar>
+    <v-card-actions>
+      <v-col><v-btn @click="generateQR(true)" style="height: 100px;" block color="primary">ペイ</v-btn></v-col>
+      <v-col><v-btn @click="generateQR(false)" style="height: 100px;" block color="primary">チャージ</v-btn></v-col>
+    </v-card-actions>
+    <vue-qrcode v-if="qr_str" :value="qr_str" :options="option" tag="img"></vue-qrcode>
+    <v-list three-line subheader>
+      <v-subheader>これはコインの使用・詳細確認画面です</v-subheader>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-subtitle class="item-subtitle">コイン名</v-list-item-subtitle>
+          <v-list-item-title class="item-title">{{ coin_data.name }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-subtitle class="item-subtitle">換算</v-list-item-subtitle>
+          <v-list-item-title class="item-title">{{ coin_data.coin_rate }} {{coin_data.name}} は {{ coin_data.yen_rate }} 円です </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-subtitle class="item-subtitle">利用期限</v-list-item-subtitle>
+          <v-list-item-title class="item-title" v-text="deadline"></v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-subtitle class="item-subtitle">説明</v-list-item-subtitle>
+          <v-list-item-title class="item-title">{{ coin_data.explanation }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
@@ -58,7 +51,6 @@ export default {
   },
   props: {
     coin_data: Object,
-    dialog_flag: Boolean,
   },
   data () {
     return {

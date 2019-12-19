@@ -20,6 +20,8 @@ export default new Vuex.Store({
     user_state: false,
     // ローディング中はfalse(Boolean)
     load_state: false,
+    // ペイモード: true, チャージモード: false
+    manage_state: {},
   },
   mutations: {
     constCoins (state, coin_data) {
@@ -35,6 +37,9 @@ export default new Vuex.Store({
     },
     updateLoad (state, load_state) {
       state.load_state = load_state
+    },
+    updateManageState (state, manage_state) {
+      state.manage_state = manage_state
     }
   },
   actions: {

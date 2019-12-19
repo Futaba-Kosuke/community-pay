@@ -39,7 +39,7 @@ export default new Router({
     {
       path: '/qr_reader',
       name: 'qr_reader',
-      component: () => import('./views/Qr_reader.vue'),
+      component: () => import('./views/ManagementCoinList.vue'),
     },
     {
       path: '/login_form',

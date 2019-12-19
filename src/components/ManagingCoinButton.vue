@@ -1,0 +1,60 @@
+<template>
+  <div>
+    <v-btn block height=70px @click.stop="openInputDialog()">
+      {{ coin_name }}
+    </v-btn>
+    <v-dialog v-model="dialog_flag">
+      <v-card>
+        <v-card-title class="headline">{{ coin_name }}</v-card-title>
+        <v-card-text>
+          <v-text-field
+            v-model="value"
+            label="金額"
+            outlined
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click="startPay()" :disabled="isInput" color="primary">ペイ</v-btn>
+          <v-btn @click="startCharge()" :disabled="isInput" color="primary">チャージ</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    coin_name: String,
+  },
+  data: function() {
+    return {
+      dialog_flag: false,
+      value: '',
+    }
+  },
+  computed: {
+    isInput: function () {
+      return !(this.value !== '' && !isNaN(this.value))
+    }
+  },
+  methods: {
+    openInputDialog: function () {
+      this.dialog_flag = true
+    },
+    startPay: function () {
+      this.$store.commit('updateManageState', { state: true, value: this.value })
+      console.log(this.$store.state.manage_state)
+      console.log(JSON.stringify(this.$store.state.manage_state))
+      console.log(JSON.parse(JSON.stringify(this.$store.state.manage_state)))
+    },
+    startCharge: function () {
+      this.$store.commit('updateManageState', { state: false, value: this.value })
+      console.log(this.$store.state.manage_state)
+      console.log(JSON.stringify(this.$store.state.manage_state))
+      console.log(JSON.parse(JSON.stringify(this.$store.state.manage_state)))
+    },
+  }
+}
+</script>

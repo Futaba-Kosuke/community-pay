@@ -15,8 +15,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn @click="startPay()" :disabled="isInput" color="primary">ペイ</v-btn>
-          <v-btn @click="startCharge()" :disabled="isInput" color="primary">チャージ</v-btn>
+          <v-btn @click="qrRead(true)" :disabled="isInput" color="primary">ペイ</v-btn>
+          <v-btn @click="qrRead(false)" :disabled="isInput" color="primary">チャージ</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -43,18 +43,12 @@ export default {
     openInputDialog: function () {
       this.dialog_flag = true
     },
-    startPay: function () {
-      this.$store.commit('updateManageState', { state: true, value: this.value })
+    qrRead: function (mode) {
+      this.$store.commit('updateManageState', { state: mode, value: this.value})
       console.log(this.$store.state.manage_state)
       console.log(JSON.stringify(this.$store.state.manage_state))
       console.log(JSON.parse(JSON.stringify(this.$store.state.manage_state)))
-    },
-    startCharge: function () {
-      this.$store.commit('updateManageState', { state: false, value: this.value })
-      console.log(this.$store.state.manage_state)
-      console.log(JSON.stringify(this.$store.state.manage_state))
-      console.log(JSON.parse(JSON.stringify(this.$store.state.manage_state)))
-    },
+    }
   }
 }
 </script>

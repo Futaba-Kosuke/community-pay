@@ -64,21 +64,24 @@ export default {
         let negative_coin_names = coin_names.filter((item) => active_coin_names.indexOf(item) === -1)  // 無効なコインの名前一覧の取得
 
         let user_active_coins  // 代入するのでそのまま
-        let coin_active_coins = []  // pushして行く用に空配列として定義
+        let coin_active_coins = []  // 空配列として定義
+        let management_coin_names
+        let management_coins
         await db_current_user.get()
           .then((res) => {
 
-            const active_coins_data = res.data().active_coins
-            user_active_coins = active_coins_data
+            const user_data = res.data()
+            user_active_coins = user_data.active_coins
             
-            active_coins_data.forEach(async (item) => {
-              
+            user_data.active_coins.forEach(async (item) => {
               await db.collection('coin').doc(item.address.id).get()
                 .then((coin) => {
                   coin_active_coins.push(coin.data())
-                })
-            
+                })            
             })
+
+            management_coin_names = user_data.management_coin_names
+            management_coins = user_data.management_coins
           })
 
         const loadDatas = {
@@ -86,6 +89,8 @@ export default {
           coin_active_coins: coin_active_coins,
           active_coin_names: active_coin_names,
           negative_coin_names: negative_coin_names,
+          management_coin_names: management_coin_names,
+          management_coins: management_coins,
         }
         console.log(loadDatas)
         

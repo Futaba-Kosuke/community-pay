@@ -15,9 +15,7 @@
     </v-toolbar>
     <div>
       <div class="coin_value">
-        <v-card height="100px">
-          <u><p style="margin: 40px 0px;">残高: {{ coin_data.value }} コイン</p></u>
-        </v-card>
+        <u><p style="margin: 40px 0px;">残高: {{ coin_data.value }} コイン</p></u>
       </div>
       <div class="coin_element">
         <u><p>変換レート</p></u>
@@ -142,7 +140,9 @@ export default {
   font-size: 40px;
   color: rgb(71, 140, 234);
   text-align: center;
-  margin: 0px
+  margin: 0px;
+  padding: .5em .75em;
+  border: 1px solid #ccc;
 }
 .coin_element {
   margin-top: 20px;

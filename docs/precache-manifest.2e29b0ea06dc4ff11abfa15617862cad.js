@@ -1,11 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "a51c83921095d3ec7e91",
-    "url": "/community-pay/js/about.a8d87969.js"
-  },
-  {
-    "revision": "dc0631f3635c7d67bcfb",
-    "url": "/community-pay/js/app.81139d8b.js"
+    "revision": "03d6c1050cb2b40f8592",
+    "url": "/community-pay/js/app.f7f87bd8.js"
   },
   {
     "revision": "798729f2ca22ea21873d",
@@ -76,7 +72,7 @@ self.__precacheManifest = [
     "url": "/community-pay/js/chunk-vendors.f09741e8.js"
   },
   {
-    "revision": "f713156ea58144ac0360b1434eb828ab",
+    "revision": "7a790aa187e4b5f9f6bcb25ea2c037ac",
     "url": "/community-pay/index.html"
   },
   {

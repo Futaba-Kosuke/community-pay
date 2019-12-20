@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/community-pay/precache-manifest.2d9a1e72a6180b9ec49dfab070e59aeb.js"
+  "/community-pay/precache-manifest.2e29b0ea06dc4ff11abfa15617862cad.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "community-pay"});

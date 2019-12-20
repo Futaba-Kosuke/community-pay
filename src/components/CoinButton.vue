@@ -2,20 +2,13 @@
   <div>
     <v-btn block height=70px @click.stop="openCoin()">
       {{ coin_name }}
-    </v-btn>  
-    <v-dialog
-      v-model="dialog_flag"
-      fullscreen
-      hide-overlay
-      transition="dialog-bottom-transition"
-    >
-      <CoinDataDialog :dialog_flag='dialog_flag' :coin_data='coin_data' @closeThis="closeCoin()"/>
-    </v-dialog>
+    </v-btn>
+    <coin-data-dialog :dialog_flag='dialog_flag' :coin_data='coin_data' @closeThis="closeCoin()"/>
   </div>
 </template>
 
 <script>
-import CoinDataDialog from './CoinDataDialog'
+import CoinDataDialog from '@/components/CoinDataDialog_ver2'
 
 export default {
   name: 'btn',
